@@ -61,5 +61,3 @@ Historically, JavaScript lived only in the browser. But with the invention of No
       *Fastify*: Focused on extremely low overhead and high speed.
 
 
-
-<!-- Ans 7 : -->
