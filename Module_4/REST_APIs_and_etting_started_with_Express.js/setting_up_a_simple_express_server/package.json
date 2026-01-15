@@ -1,0 +1,21 @@
+{
+  "name": "setting_up_a_simple_express_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "express": "^5.2.1",
+    "i": "^0.3.7",
+    "nodemon": "^3.1.11",
+    "npm": "^11.7.0"
+  }
+}
