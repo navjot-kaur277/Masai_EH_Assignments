@@ -1,0 +1,58 @@
+-- STEP 1: CREATE TABLE
+CODE: 
+CREATE TABLE students (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    age integer,
+    course TEXT,
+    created_at timestamp default current_timestamp
+);
+RESULT: Success. No rows returned.
+
+
+
+-- STEP 2: INSERT DATA (5-10 RECORDS)
+CODE:
+INSERT INTO students (name, email, age, course) 
+VALUES 
+('Aarav Sharma', 'aarav.s@example.com', 21, 'Computer Science'),
+('Jyoti', 'jyoti21.q@example.com', 20, 'Physics'),
+('Riya', 'riya00@example.com', 19, 'Chemistry'),
+('Ishaan Khan', 'ishaan.k@example.com', 22, 'Computer Science'),
+('Rohan Gupta', 'rohan.g@example.com', 20, 'Biology'),
+('Sanya Malhotra', 'sanya.m@example.com', 23, 'Computer Science'),
+('Priya Das', 'priya.d@example.com', 19, 'Mathematics');
+RESULT: Success. 7 rows affected.
+
+
+-- STEP 3: READ DATA (FETCHING RECORDS)
+CODE 1: SELECT * FROM students;
+RESULT: 7 rows returned (Aarav, Jyoti, Riya, Ishaan, Rohan, Sanya, Priya).
+
+CODE 2: SELECT * FROM students WHERE age > 20;
+RESULT: 3 rows returned (Aarav Sharma, Ishaan Khan, Sanya Malhotra).
+
+CODE 3: SELECT name, email FROM students;
+RESULT: 
+Aarav Sharma, aarav.s@example.com
+Jyoti, jyoti21.q@example.com
+Riya, riya00@example.com
+Ishaan Khan, ishaan.k@example.com
+Rohan Gupta, rohan.g@example.com
+Sanya Malhotra, sanya.m@example.com
+Priya Das, priya.d@example.com
+
+
+CODE 4: SELECT * FROM students WHERE course = 'Computer Science';
+RESULT: 3 rows returned (Aarav Sharma, Ishaan Khan, Sanya Malhotra).
+
+-- STEP 4: UPDATE DATA
+CODE 1: UPDATE students SET age = 25 WHERE name = 'Aarav Sharma';
+RESULT: Success. No rows returned
+
+CODE 2: UPDATE students SET course = 'Data Science' WHERE course = 'Computer Science';
+RESULT: Success. No rows returned
+
+
+
