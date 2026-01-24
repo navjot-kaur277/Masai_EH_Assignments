@@ -1,0 +1,64 @@
+---Step 2: AGGREATE QUERIES
+
+-- 1. Count the total number of students
+SELECT COUNT(*) AS total_students FROM students;
+-- Result: 7
+-- 2. Find the average age of students
+SELECT AVG(age) AS average_age FROM students;
+-- Result: 21.14
+
+-- 3. Find the minimum and maximum age
+SELECT MIN(age) AS youngest, MAX(age) AS oldest FROM students;
+-- Result: youngest: 19, oldest: 25
+
+-- 4. Count how many students are enrolled in each course
+SELECT course, COUNT(*) AS student_count FROM students GROUP BY course;
+-- Result: 
+-- Data Science: 3
+-- Physics: 1
+-- Chemistry: 1
+-- Biology: 1
+-- Mathematics: 1
+
+-- 5. Count students whose age is greater than 20
+SELECT COUNT(*) AS students_above_20 FROM students WHERE age > 20;
+-- Result: 4 (Aarav, Ishaan, Sanya, David)
+
+---Step 3 : GROUPING AND FILTERING 
+-- 1. Display course-wise student count
+SELECT course, COUNT(*) AS student_count FROM students GROUP BY course;
+-- Result: (Same as Aggregate Query #4)
+
+-- 2. Display only courses where student count is greater than 1
+SELECT course, COUNT(*) AS student_count 
+FROM students 
+GROUP BY course 
+HAVING COUNT(*) > 1;
+-- Result: Data Science (3)
+
+-- 3. Display courses sorted by highest student count first
+SELECT course, COUNT(*) AS student_count 
+FROM students 
+GROUP BY course 
+ORDER BY student_count DESC;
+-- Result: Data Science, Physics, Chemistry... (in descending order)
+
+
+---Step 4 : ORDERING AND LIMITING 
+-- 1. Fetch the latest 3 students based on created_at
+SELECT * FROM students 
+ORDER BY created_at DESC 
+LIMIT 3;
+-- Result: (Returns the 3 rows with the most recent timestamps)
+
+-- 2. Fetch the top 5 oldest students
+SELECT * FROM students 
+ORDER BY age DESC 
+LIMIT 5;
+-- Result: Aarav (25), Sanya (23), Ishaan (22), Jyoti (20), Rohan (20)
+
+-- 3. Fetch students enrolled in 'Data Science', sorted by age (descending)
+SELECT * FROM students 
+WHERE course = 'Data Science' 
+ORDER BY age DESC;
+-- Result: Aarav (25), Sanya (23), Ishaan (22)
