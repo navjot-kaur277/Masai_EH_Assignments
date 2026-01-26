@@ -1,0 +1,63 @@
+/**************************************************************
+ * SQL CRUD Operations on Relationships
+ * Data: Komal, Riya, Payal, Sneha, Shreya
+ **************************************************************/
+
+-- STEP 3: READ DATA (Relational Reads)
+
+-- 1. Fetch all users
+SELECT * FROM users;
+
+-- 2. Fetch all orders
+SELECT * FROM orders;
+
+-- 3. Fetch all orders for a specific user (e.g., Komal, id=1)
+SELECT * FROM orders WHERE user_id = 1;
+
+-- 4. Fetch users who have more than one order
+SELECT users.name, COUNT(orders.id) as order_count
+FROM users
+JOIN orders ON users.id = orders.user_id
+GROUP BY users.id, users.name
+HAVING COUNT(orders.id) > 1;
+
+-- 5. Fetch total order amount per user
+SELECT users.name, SUM(orders.amount) as total_spent
+FROM users
+JOIN orders ON users.id = orders.user_id
+GROUP BY users.id, users.name;
+
+
+-- STEP 4: UPDATE DATA
+
+-- 1. Update the email of one user (Updating Sneha)
+UPDATE users SET email = 'sneha_updated@example.com' WHERE name = 'Sneha';
+
+-- 2. Update the status of all orders for a specific user (Updating Riya's orders to 'delivered')
+UPDATE orders SET status = 'delivered' WHERE user_id = 2;
+
+-- 3. Update order amount for a single order (Order ID 1)
+UPDATE orders SET amount = 600 WHERE id = 1;
+
+
+-- STEP 5: DELETE DATA
+
+-- 1. Delete one order using order id
+DELETE FROM orders WHERE id = 10;
+
+-- 2. Delete all orders of a specific user (e.g., Shreya, id=5)
+DELETE FROM orders WHERE user_id = 5;
+
+-- 3. Attempt deleting a user with existing orders
+-- If you used 'ON DELETE CASCADE' in Step 1, this will delete the user AND their orders.
+-- If not, PostgreSQL will throw a "Foreign Key Violation" error.
+DELETE FROM users WHERE id = 1;
+
+
+-- STEP 6: CONCEPTUAL QUESTION
+-- Why should orders not be stored inside the users table?
+/*
+1. Data Normalization: Keeping them separate avoids repeating user data (like name/email) for every single order.
+2. Flexibility: A user can have infinite orders; storing them in one row would make the table messy and hard to search.
+3. Integrity: It is easier to update a user's profile in one place without affecting thousands of order records.
+*/
